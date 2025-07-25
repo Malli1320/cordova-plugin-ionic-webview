@@ -120,4 +120,16 @@
     [rootController presentViewController:alert animated:YES completion:nil];
 }
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 150000
+- (void)webView:(WKWebView *)webView
+    requestMediaCapturePermissionForOrigin:(WKSecurityOrigin *)origin
+                          initiatedByFrame:(WKFrameInfo *)frame
+                                      type:(WKMediaCaptureType)type
+                           decisionHandler:
+                               (void (^)(WKPermissionDecision decision))
+                                   decisionHandler API_AVAILABLE(ios(15.0)) {
+    decisionHandler(WKPermissionDecisionGrant);
+}
+#endif
+
 @end
